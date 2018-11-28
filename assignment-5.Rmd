@@ -27,21 +27,69 @@ phd <- read_csv("phd_by_field.csv")
 for males and females (including full-time/part-time and private/public universities) in the United
 States from 1967 - 2015. Describe your results statistically, graphically and in text.
 ```{r}
-# single linear regression?
 
-# full time enrollment 
+#total enrollment 
+
+total_enroll <- ggplot(grad_enroll, aes(x = Year)) +
+  geom_line(aes(y = Total_Males, color = "blue")) +
+  geom_line(aes(y = Total_Females, color = "lightblue")) +
+   scale_colour_discrete(name = "Student Type", labels = c("Males", "Females")) +
+  theme_classic() +
+  theme(axis.text.x=element_text(angle=90,hjust=1)) +
+  labs(y = "Total Enrollment", x= "Year") +
+   theme(axis.text=element_text(size=11))+
+  theme(axis.title=element_text(size=12))+
+  scale_y_continuous(expand = c(0,0), limits = c(0,1800000))+
+  scale_x_continuous(expand = c(0,0), limits = c(1967,2015))
+                      
+total_enroll
+#full time enrollment 
 
 full_time <- ggplot(grad_enroll, aes(x = Year)) +
-  geom_line(aes(y = Total_Males), color = "blue") +
-  geom_line(aes(y = Total_Females), color = "red")
-                      
+  geom_line(aes(y = Males_full_time, color = "blue")) +
+  geom_line(aes(y = Females_full_time, color = "lightblue")) +
+  scale_colour_discrete(name = "Student Type", labels = c("Males", "Females")) +
+  theme_classic() +
+  theme(axis.text.x=element_text(angle=90,hjust=1)) +
+  labs(y = "Total Full Time Enrollment", x= "Year") +
+   theme(axis.text=element_text(size=11))+
+  theme(axis.title=element_text(size=12))+
+  scale_y_continuous(expand = c(0,0), limits = c(0,1000000))+
+  scale_x_continuous(expand = c(0,0), limits = c(1967,2015))
+
 full_time
-#part time enrollment 
 
+#part time enrollment
 
-#private-public 
+part_time <- ggplot(grad_enroll, aes(x = Year)) +
+  geom_line(aes(y = Males_part_time, color = "blue")) +
+  geom_line(aes(y = Females_part_time, color = "lightblue")) +
+   scale_colour_discrete(name = "Student Type", labels = c("Males", "Females")) +
+  theme_classic() +
+  theme(axis.text.x=element_text(angle=90,hjust=1)) +
+  labs(y = "Total Part Time Enrollment", x= "Year") +
+   theme(axis.text=element_text(size=11))+
+  theme(axis.title=element_text(size=12))+
+  scale_y_continuous(expand = c(0,0), limits = c(0,1000000))+
+  scale_x_continuous(expand = c(0,0), limits = c(1967,2015))
 
+part_time
 
+#public vs private 
+
+public_private <- ggplot(grad_enroll, aes(x = Year)) +
+  geom_line(aes(y = Public, color = "blue")) +
+  geom_line(aes(y = Private, color = "lightblue")) +
+   scale_colour_discrete(name = "University Type", labels = c("Public", "Private")) +
+  theme_classic() +
+  theme(axis.text.x=element_text(angle=90,hjust=1)) +
+  labs(y = "Total Enrollment", x= "Year") +
+   theme(axis.text=element_text(size=11))+
+  theme(axis.title=element_text(size=12))+
+  scale_y_continuous(expand = c(0,0), limits = c(0,2000000))+
+  scale_x_continuous(expand = c(0,0), limits = c(1967,2015))
+
+public_private
 
 ```
 
