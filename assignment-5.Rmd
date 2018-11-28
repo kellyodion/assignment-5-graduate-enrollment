@@ -109,6 +109,42 @@ Does median salary differ significantly between male and female starting postdoc
 median salary differ significantly between male and female PhD recipients in non-postdoc employment
 positions?
 ```{r}
+#values are for the year 2015 
+
+#employment positions 
+
+#median femlae salary for starting employment 
+
+med_female_employment <- median(median_salary$females_employment)
+med_female_employment
+
+#median male salary for starting employment 
+
+med_male_employment <- median(median_salary$males_employment)
+med_male_employment
+
+# Compare male and female starting employment salaries using Mann Whitney 
+
+test_employment <- wilcox.test(median_salary$males_employment, median_salary$females_employment)
+test_employment
+
+
+
+# Postdoc positions 
+
+# median female salary for post doc positions 
+
+med_female_postdoc <- median(median_salary$females_postdoc)
+med_female_postdoc
+# median male salary for post doc positions 
+
+med_male_postdoc <- median(median_salary$males_postdoc)
+med_male_postdoc
+# Compare male and female startig postdoc salaries using Mann Whitley
+
+test_postdoc <- wilcox.test(median_salary$males_postdoc, median_salary$females_postdoc)
+
+test_postdoc
 
 ```
 
