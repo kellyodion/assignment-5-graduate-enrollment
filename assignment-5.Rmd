@@ -1,0 +1,47 @@
+---
+title: "assignment-5"
+author: "Kelly Odion, Kirby Bartlett, Anna Calle"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+1) Male and female graduate enrollment (1967 - 2015). Compare trends in total graduate enrollment
+for males and females (including full-time/part-time and private/public universities) in the United
+States from 1967 - 2015. Describe your results statistically, graphically and in text.
+```{r}
+# single linear regression?
+```
+
+2) Shifts in female PhD recipients by field (1985, 2000, and 2015). Describe if and how there was
+a shift in PhDs awarded to females in four fields (Physical and Earth Sciences, Engineering, Education,
+and Humanities & Arts) in 1985, 2000, and 2015. Describe your results statistically, in a graph or table,
+and in text. Note: There are several ways that you can interpret this question. You are invited to decide
+which you think is/are most interesting. Just be really clear about what you are asking/answering in
+your report.
+```{r}
+#chi square? 
+```
+
+3) Male and female salaries for starting postdoctoral and other employment positions (2015).
+Compare median salaries for male and female doctorate recipients in 2015. Answer these two questions:
+Does median salary differ significantly between male and female starting postdoc positions? Does
+median salary differ significantly between male and female PhD recipients in non-postdoc employment
+positions?
+```{r}
+
+```
+
+4) Exploring academic salaries for professors in U.S. colleges. Explore relationships between
+variables in the ‘Faculty salary data (2008 - 2009 survey)’ dataset. Develop a model describing faculty
+salary based on data for faculty sex, rank, years in current position, field, and number of years since
+doctoral degree was earned. You should make decisions regarding which variables should remain in your
+final model. Describe the results qualitatively and quantitatively (i.e., don’t just report the statistical
+results of the model – make sure you describe interesting findings in text). You can also discuss any
+concerns that you have with the model(s) you present, if any.
+```{r}
+
+```
+
