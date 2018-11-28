@@ -32,8 +32,8 @@ States from 1967 - 2015. Describe your results statistically, graphically and in
 # full time enrollment 
 
 full_time <- ggplot(grad_enroll, aes(x = Year)) +
-  geom_line(aes(y = Males_full_time)) +
-  geom_line(aes(y = Females_full_time))
+  geom_line(aes(y = Total_Males), color = "blue") +
+  geom_line(aes(y = Total_Females), color = "red")
                       
 full_time
 #part time enrollment 
