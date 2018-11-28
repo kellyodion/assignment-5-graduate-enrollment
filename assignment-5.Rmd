@@ -8,6 +8,21 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+Load packages and read in files
+```{r, include = FALSE}
+library(tidyverse)
+
+
+faculty <- read_csv("faculty.csv")
+grad_enroll <-read_csv("grad_enrollment.csv")
+median_salary <- read_csv("median_salary.csv")
+phd <- read_csv("phd_by_field.csv")
+
+
+```
+
+
+
 1) Male and female graduate enrollment (1967 - 2015). Compare trends in total graduate enrollment
 for males and females (including full-time/part-time and private/public universities) in the United
 States from 1967 - 2015. Describe your results statistically, graphically and in text.
