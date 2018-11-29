@@ -101,6 +101,11 @@ which you think is/are most interesting. Just be really clear about what you are
 your report.
 ```{r}
 #chi square? 
+#proportions of females in those four fields from 1985 to 2000 and from 2000 to 2015 
+# t-test? 
+
+
+
 ```
 
 3) Male and female salaries for starting postdoctoral and other employment positions (2015).
@@ -129,7 +134,6 @@ test_employment <- wilcox.test(median_salary$males_employment, median_salary$fem
 test_employment
 
 
-
 # Postdoc positions 
 
 # median female salary for post doc positions 
@@ -146,6 +150,10 @@ test_postdoc <- wilcox.test(median_salary$males_postdoc, median_salary$females_p
 
 test_postdoc
 
+
+#Based on our results, there was not a significant difference in male and female salaires in 2015 either in postdoc appointments or in traditional employment settings (W = 117, p = 0.8671). Actual difference in median salaries for employment positions was $3,417. Actual difference in median salaries for post doc positions was $3,000
+
+
 ```
 
 4) Exploring academic salaries for professors in U.S. colleges. Explore relationships between
@@ -156,6 +164,8 @@ final model. Describe the results qualitatively and quantitatively (i.e., don’
 results of the model – make sure you describe interesting findings in text). You can also discuss any
 concerns that you have with the model(s) you present, if any.
 ```{r}
+# use multiple linear regression 
+
 
 ```
 
