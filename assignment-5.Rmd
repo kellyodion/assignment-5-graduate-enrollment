@@ -17,6 +17,7 @@ faculty <- read_csv("faculty.csv")
 grad_enroll <-read_csv("grad_enrollment.csv")
 median_salary <- read_csv("median_salary.csv")
 phd <- read_csv("phd_by_field.csv")
+phd_prop <-read_csv("phd_proportions.csv")
 
 
 ```
@@ -103,7 +104,6 @@ your report.
 #chi square? 
 #proportions of females in those four fields from 1985 to 2000 and from 2000 to 2015 
 # t-test? 
-
 
 
 ```
