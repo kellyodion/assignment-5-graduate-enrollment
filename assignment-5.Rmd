@@ -103,7 +103,7 @@ your report.
 ```{r}
 #chi square? 
 #proportions of females in those four fields from 1985 to 2000 and from 2000 to 2015 
-# t-test? 
+
 
 
 ```
@@ -165,6 +165,8 @@ results of the model – make sure you describe interesting findings in text). Y
 concerns that you have with the model(s) you present, if any.
 ```{r}
 # use multiple linear regression 
+ 
+professor_lm1 <- lm(salary ~ faculty_rank, discipline, years_since_phd, years_faculty_service, sex, data = faculty)
 
 
 ```
