@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 Load packages and read in files
 ```{r, include = FALSE}
 library(tidyverse)
-
+library(stargazer)
 
 faculty <- read_csv("faculty.csv")
 grad_enroll <-read_csv("grad_enrollment.csv")
@@ -164,10 +164,40 @@ final model. Describe the results qualitatively and quantitatively (i.e., don’
 results of the model – make sure you describe interesting findings in text). You can also discuss any
 concerns that you have with the model(s) you present, if any.
 ```{r}
-# use multiple linear regression 
+# Use multiple linear regression 
  
-professor_lm1 <- lm(salary ~ faculty_rank, discipline, years_since_phd, years_faculty_service, sex, data = faculty)
+# Saturated model
+professor_lm1 <- lm(salary ~ faculty_rank + discipline + years_since_phd + years_faculty_service + sex, data = faculty)
 
+summary(professor_lm1)
 
+```
+
+```{r}
+# Updated model
+# Excluded years since PhD because its largely expalined by years of faculty service
+
+professor_lm2 <- lm(salary ~ faculty_rank + discipline + years_since_phd + sex, data = faculty)
+
+summary(professor_lm2)
+
+# Model diagnostics
+
+plot(professor_lm2)
+
+# Heteroscedasticity and residuals normality look OK
+```
+
+```{r}
+# AIC values
+sat_aic <- AIC(professor_lm1)
+final_aic <- AIC(professor_lm2)
+
+```
+
+```{r}
+# Regression table
+lm_table <- stargazer(professor_lm1, professor_lm2, type = "html")
+lm_table
 ```
 
