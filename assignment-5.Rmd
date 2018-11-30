@@ -29,8 +29,56 @@ for males and females (including full-time/part-time and private/public universi
 States from 1967 - 2015. Describe your results statistically, graphically and in text.
 ```{r}
 
-#total enrollment 
+#model of all female students over time
 
+grad_model_females <- lm(Total_Females ~ Year, data = grad_enroll)
+grad_model_females
+
+# equation: Enrollment = -58955502 + 30126(year) 
+
+#model of all male students over time
+
+grad_model_males <- lm(Total_Males ~ Year, data = grad_enroll)
+grad_model_males
+
+#equation: Enrollment = -17112153 + 9069 (year)
+
+#From 1967 to 2015, women enrollment in graduate programs rose by an average of 30,126 per year, while enrollment for men only rose by 9,069
+
+#graph of model for females
+
+grad_female_final_graph <- ggplot(grad_enroll, aes(x = Year, y = Total_Females)) +
+  geom_point() +
+  geom_smooth(method = lm, se = TRUE, size = 0.5, color = "gray20") +
+  theme_bw() +
+  scale_x_continuous( expand = c(0,0), limits = c(1967, 2015)) +
+   scale_y_continuous(expand = c(0,0), limits = c(0,1800000)) +
+  labs(x = "Year", y = "US Annual Graduate School Enrollment- Women")
+
+grad_female_final_graph
+
+# graph of model for males
+
+grad_male_final_graph <- ggplot(grad_enroll, aes(x = Year, y = Total_Males)) +
+  geom_point() +
+  geom_smooth(method = lm, se = TRUE, size = 0.5, color = "gray20") +
+  theme_bw() +
+  scale_x_continuous( expand = c(0,0), limits = c(1967, 2015)) +
+   scale_y_continuous(expand = c(0,0), limits = c(0,1800000)) +
+  labs(x = "Year", y = "US Annual Graduate School Enrollment- Men")
+
+grad_male_final_graph
+
+
+
+```
+
+1) continued: Extra graphs and info
+
+```{r}
+#non regression graphs in case we decide to use them
+
+#total enrollment 
 total_enroll <- ggplot(grad_enroll, aes(x = Year)) +
   geom_line(aes(y = Total_Males, color = "blue")) +
   geom_line(aes(y = Total_Females, color = "lightblue")) +
@@ -65,7 +113,7 @@ full_time
 part_time <- ggplot(grad_enroll, aes(x = Year)) +
   geom_line(aes(y = Males_part_time, color = "blue")) +
   geom_line(aes(y = Females_part_time, color = "lightblue")) +
-   scale_colour_discrete(name = "Student Type", labels = c("Males", "Females")) +
+  scale_colour_discrete(name = "Student Type", labels = c("Males", "Females")) +
   theme_classic() +
   theme(axis.text.x=element_text(angle=90,hjust=1)) +
   labs(y = "Total Part Time Enrollment", x= "Year") +
@@ -91,7 +139,6 @@ public_private <- ggplot(grad_enroll, aes(x = Year)) +
   scale_x_continuous(expand = c(0,0), limits = c(1967,2015))
 
 public_private
-
 ```
 
 2) Shifts in female PhD recipients by field (1985, 2000, and 2015). Describe if and how there was
