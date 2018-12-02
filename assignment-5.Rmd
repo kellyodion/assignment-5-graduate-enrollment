@@ -12,6 +12,7 @@ Load packages and read in files
 ```{r, include = FALSE}
 library(tidyverse)
 library(stargazer)
+library(MASS)
 
 faculty <- read_csv("faculty.csv")
 grad_enroll <-read_csv("grad_enrollment.csv")
@@ -218,6 +219,11 @@ professor_lm1 <- lm(salary ~ faculty_rank + discipline + years_since_phd + years
 
 summary(professor_lm1)
 
+```
+```{r}
+professor_stepwise <- stepAIC(professor_lm1, direction = "both", 
+                      trace = FALSE)
+summary(professor_stepwise)
 ```
 
 ```{r}
