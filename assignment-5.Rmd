@@ -178,7 +178,7 @@ med_male_employment
 
 # Compare male and female starting employment salaries using Mann Whitney 
 
-test_employment <- wilcox.test(median_salary$males_employment, median_salary$females_employment)
+test_employment <- wilcox.test(median_salary$males_employment, median_salary$females_employment, paired = TRUE)
 test_employment
 
 
@@ -194,12 +194,12 @@ med_male_postdoc <- median(median_salary$males_postdoc)
 med_male_postdoc
 # Compare male and female startig postdoc salaries using Mann Whitley
 
-test_postdoc <- wilcox.test(median_salary$males_postdoc, median_salary$females_postdoc)
+test_postdoc <- wilcox.test(median_salary$males_postdoc, median_salary$females_postdoc, paired = TRUE)
 
 test_postdoc
 
 
-#Based on our results, there was not a significant difference in male and female salaires in 2015 either in postdoc appointments or in traditional employment settings (W = 117, p = 0.8671). Actual difference in median salaries for employment positions was $3,417. Actual difference in median salaries for post doc positions was $3,000
+#Based on our results, there was not a significant difference in male and female salaires in 2015 in postdoc appointments, but there was in traditional employment settings (V = 101, p = 0.0025). Actual difference in median salaries for employment positions was $3,417. Actual difference in median salaries for post doc positions was $3,000
 
 
 ```
