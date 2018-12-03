@@ -11,7 +11,10 @@ knitr::opts_chunk$set(echo = TRUE)
 Load packages and read in files
 ```{r, include = FALSE}
 library(tidyverse)
-
+library(stargazer)
+library(MASS)
+library(reshape)
+library(reshape2)
 
 faculty <- read_csv("faculty.csv")
 grad_enroll <-read_csv("grad_enrollment.csv")
@@ -32,12 +35,64 @@ States from 1967 - 2015. Describe your results statistically, graphically and in
 #Data managment for part 1
 
 
+<<<<<<< HEAD
 ```
 
 ```{r}
 #Graphs for part 1
 #total enrollment 
+=======
+#model of all female students over time
 
+grad_model_females <- lm(Total_Females ~ Year, data = grad_enroll)
+grad_model_females
+
+# equation: Enrollment = -58955502 + 30126(year) 
+
+#model of all male students over time
+
+grad_model_males <- lm(Total_Males ~ Year, data = grad_enroll)
+grad_model_males
+
+#equation: Enrollment = -17112153 + 9069 (year)
+
+#From 1967 to 2015, women enrollment in graduate programs rose by an average of 30,126 per year, while enrollment for men only rose by 9,069
+
+#graph of model for females
+
+grad_female_final_graph <- ggplot(grad_enroll, aes(x = Year, y = Total_Females)) +
+  geom_point() +
+  geom_smooth(method = lm, se = TRUE, size = 0.5, color = "gray20") +
+  theme_bw() +
+  scale_x_continuous( expand = c(0,0), limits = c(1967, 2015)) +
+   scale_y_continuous(expand = c(0,0), limits = c(0,1800000)) +
+  labs(x = "Year", y = "US Annual Graduate School Enrollment- Women")
+
+grad_female_final_graph
+
+# graph of model for males
+>>>>>>> c1fe095a025cd67bc51dfc405a336a8bff35f819
+
+grad_male_final_graph <- ggplot(grad_enroll, aes(x = Year, y = Total_Males)) +
+  geom_point() +
+  geom_smooth(method = lm, se = TRUE, size = 0.5, color = "gray20") +
+  theme_bw() +
+  scale_x_continuous( expand = c(0,0), limits = c(1967, 2015)) +
+   scale_y_continuous(expand = c(0,0), limits = c(0,1800000)) +
+  labs(x = "Year", y = "US Annual Graduate School Enrollment- Men")
+
+grad_male_final_graph
+
+
+
+```
+
+1) continued: Extra graphs and info
+
+```{r}
+#non regression graphs in case we decide to use them
+
+#total enrollment 
 total_enroll <- ggplot(grad_enroll, aes(x = Year)) +
   geom_line(aes(y = Total_Males, color = "blue")) +
   geom_line(aes(y = Total_Females, color = "lightblue")) +
@@ -72,7 +127,7 @@ full_time
 part_time <- ggplot(grad_enroll, aes(x = Year)) +
   geom_line(aes(y = Males_part_time, color = "blue")) +
   geom_line(aes(y = Females_part_time, color = "lightblue")) +
-   scale_colour_discrete(name = "Student Type", labels = c("Males", "Females")) +
+  scale_colour_discrete(name = "Student Type", labels = c("Males", "Females")) +
   theme_classic() +
   theme(axis.text.x=element_text(angle=90,hjust=1)) +
   labs(y = "Total Part Time Enrollment", x= "Year") +
@@ -98,7 +153,6 @@ public_private <- ggplot(grad_enroll, aes(x = Year)) +
   scale_x_continuous(expand = c(0,0), limits = c(1967,2015))
 
 public_private
-
 ```
 
 2) Shifts in female PhD recipients by field (1985, 2000, and 2015). Describe if and how there was
@@ -137,7 +191,7 @@ med_male_employment
 
 # Compare male and female starting employment salaries using Mann Whitney 
 
-test_employment <- wilcox.test(median_salary$males_employment, median_salary$females_employment)
+test_employment <- wilcox.test(median_salary$males_employment, median_salary$females_employment, paired = TRUE)
 test_employment
 
 
@@ -153,12 +207,27 @@ med_male_postdoc <- median(median_salary$males_postdoc)
 med_male_postdoc
 # Compare male and female startig postdoc salaries using Mann Whitley
 
-test_postdoc <- wilcox.test(median_salary$males_postdoc, median_salary$females_postdoc)
+test_postdoc <- wilcox.test(median_salary$males_postdoc, median_salary$females_postdoc, paired = TRUE)
 
 test_postdoc
 
+#create boxplot 
 
-#Based on our results, there was not a significant difference in male and female salaires in 2015 either in postdoc appointments or in traditional employment settings (W = 117, p = 0.8671). Actual difference in median salaries for employment positions was $3,417. Actual difference in median salaries for post doc positions was $3,000
+boxplot_data <- melt(median_salary)
+
+employment_finalized <- ggplot(boxplot_data, aes(x = variable, y = value)) +
+  geom_boxplot() +
+  labs(y = "Annual Salary ($)", x = "") +
+  geom_jitter(width = 0.1, aes(color = variable)) +
+  scale_color_manual(values = c("blue","lightblue", "green", "lightgreen"), 
+                     labels=c("Employed Males","Employed Females","Male Postdocs","Female Postdocs"), 
+                     name = "Group") +
+  scale_x_discrete(labels=c("Employed Males","Employed Females","Male Postdocs","Female Postdocs")) +
+  theme_classic()
+
+employment_finalized
+
+#Based on our results, there was not a significant difference in male and female salaires in 2015 in postdoc appointments, but there was in traditional employment settings (V = 101, p = 0.0025). Actual difference in median salaries for employment positions was $3,417. Actual difference in median salaries for post doc positions was $3,000
 
 
 ```
@@ -171,10 +240,45 @@ final model. Describe the results qualitatively and quantitatively (i.e., don’
 results of the model – make sure you describe interesting findings in text). You can also discuss any
 concerns that you have with the model(s) you present, if any.
 ```{r}
-# use multiple linear regression 
+# Use multiple linear regression 
  
-professor_lm1 <- lm(salary ~ faculty_rank, discipline, years_since_phd, years_faculty_service, sex, data = faculty)
+# Saturated model
+professor_lm1 <- lm(salary ~ faculty_rank + discipline + years_since_phd + years_faculty_service + sex, data = faculty)
 
+summary(professor_lm1)
 
+```
+```{r}
+professor_stepwise <- stepAIC(professor_lm1, direction = "both", 
+                      trace = FALSE)
+summary(professor_stepwise)
+```
+
+```{r}
+# Updated model
+# Excluded years since PhD because its largely expalined by years of faculty service
+
+professor_lm2 <- lm(salary ~ faculty_rank + discipline + years_since_phd + sex, data = faculty)
+
+summary(professor_lm2)
+
+# Model diagnostics
+
+plot(professor_lm2)
+
+# Heteroscedasticity and residuals normality look OK
+```
+
+```{r}
+# AIC values
+sat_aic <- AIC(professor_lm1)
+final_aic <- AIC(professor_lm2)
+
+```
+
+```{r}
+# Regression table
+lm_table <- stargazer(professor_lm1, professor_lm2, type = "html")
+lm_table
 ```
 
