@@ -13,7 +13,6 @@ Load packages and read in files
 library(tidyverse)
 library(stargazer)
 library(MASS)
-library(reshape)
 library(reshape2)
 
 faculty <- read_csv("faculty.csv")
@@ -165,6 +164,17 @@ your report.
 #chi square? 
 #proportions of females in those four fields from 1985 to 2000 and from 2000 to 2015 
 
+chisq <- chisq.test(phd_prop)
+chisq
+
+rownames(phd_prop) <- c(
+"Physical sciences and earth sciences",
+"Engineering",
+"Education",
+"Humanities and arts")
+
+library(corrplot)
+corrplot(chisq$residuals, is.cor = FALSE)
 
 
 ```
