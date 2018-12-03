@@ -13,6 +13,8 @@ Load packages and read in files
 library(tidyverse)
 library(stargazer)
 library(MASS)
+library(reshape)
+library(reshape2)
 
 faculty <- read_csv("faculty.csv")
 grad_enroll <-read_csv("grad_enrollment.csv")
@@ -198,6 +200,17 @@ test_postdoc <- wilcox.test(median_salary$males_postdoc, median_salary$females_p
 
 test_postdoc
 
+#create boxplot 
+
+boxplot_data <- melt(median_salary)
+
+employment_finalized <- ggplot(boxplot_data, aes(x = variable, y = value)) +
+  geom_boxplot() +
+  labs(y = "Annual Salary ($)", x = "") +
+  geom_jitter(width = 0.1, aes(color = variable)) +
+  theme_classic()
+
+employment_finalized
 
 #Based on our results, there was not a significant difference in male and female salaires in 2015 in postdoc appointments, but there was in traditional employment settings (V = 101, p = 0.0025). Actual difference in median salaries for employment positions was $3,417. Actual difference in median salaries for post doc positions was $3,000
 
