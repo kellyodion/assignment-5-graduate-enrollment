@@ -208,6 +208,10 @@ employment_finalized <- ggplot(boxplot_data, aes(x = variable, y = value)) +
   geom_boxplot() +
   labs(y = "Annual Salary ($)", x = "") +
   geom_jitter(width = 0.1, aes(color = variable)) +
+  scale_color_manual(values = c("blue","lightblue", "green", "lightgreen"), 
+                     labels=c("Employed Males","Employed Females","Male Postdocs","Female Postdocs"), 
+                     name = "Group") +
+  scale_x_discrete(labels=c("Employed Males","Employed Females","Male Postdocs","Female Postdocs")) +
   theme_classic()
 
 employment_finalized
