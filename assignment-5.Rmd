@@ -27,8 +27,15 @@ phd_prop <-read_csv("phd_proportions.csv")
 1) Male and female graduate enrollment (1967 - 2015). Compare trends in total graduate enrollment
 for males and females (including full-time/part-time and private/public universities) in the United
 States from 1967 - 2015. Describe your results statistically, graphically and in text.
-```{r}
 
+```{r}
+#Data managment for part 1
+
+
+```
+
+```{r}
+#Graphs for part 1
 #total enrollment 
 
 total_enroll <- ggplot(grad_enroll, aes(x = Year)) +
