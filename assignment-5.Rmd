@@ -341,6 +341,7 @@ vif(professor_lm4)
 ```{r}
 # Interaction terms
 
+
 # AIC interaction terms
 ```
 
