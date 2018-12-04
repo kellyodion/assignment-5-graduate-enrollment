@@ -33,19 +33,21 @@ States from 1967 - 2015. Describe your results statistically, graphically and in
 ```{r}
 #Data managment for part 1
 
-
-
-```
-
-```{r}
-#Graphs for part 1
-#total enrollment 
+#looking at total enrollment 
 #model of all female students over time
 
 grad_model_females <- lm(Total_Females ~ Year, data = grad_enroll)
 grad_model_females
 
 # equation: Enrollment = -58955502 + 30126(year) 
+
+#explore model fit 
+
+summary(grad_model_females)
+
+correlation_females <- cor.test(grad_enroll$Year, grad_enroll$Total_Females)
+correlation_females
+
 
 #model of all male students over time
 
@@ -54,7 +56,23 @@ grad_model_males
 
 #equation: Enrollment = -17112153 + 9069 (year)
 
+#explore model fit
+summary(grad_model_males)
+
+correlation_males <- cor.test(grad_enroll$Year, grad_enroll$Total_Males)
+correlation_males
+
+
 #From 1967 to 2015, women enrollment in graduate programs rose by an average of 30,126 per year, while enrollment for men only rose by 9,069
+
+#Summary of model stats for female model: the model signficantly predicts female graduate enrollment. p < 0.001. R squared is 0.982. Correlation is 0.9913, indicating a strong positive correlation. (b = 30126, t(47) = 51.66, p < 0.001), (F(1,47) = 2669, p < 0.001, R2 = 0.98)
+
+#Summary of model stats for male model: the model signficantly predicts male graduate enrollment. p < 0.001. R squared is 0.8545. Correlation is 0.9568, indicating a strong positive correlation. (b = 9069, t(47) = 16.61, p < 0.001), (F(1,47) = 276, p < 0.001, R2 = 0.85) 
+
+```
+
+```{r}
+#Graphs for part 1
 
 #graph of model for females
 
@@ -68,13 +86,6 @@ grad_female_final_graph <- ggplot(grad_enroll, aes(x = Year, y = Total_Females))
   theme(text = element_text(family = "Times New Roman"))
 
 grad_female_final_graph
-
-#explore model fit 
-
-summary(grad_model_females)
-
-correlation_females <- cor.test(grad_enroll$Year, grad_enroll$Total_Females)
-correlation_females
 
 # graph of model for males
 
@@ -90,17 +101,11 @@ grad_male_final_graph <- ggplot(grad_enroll, aes(x = Year, y = Total_Males)) +
 
 grad_male_final_graph
 
-#explore model fit
-summary(grad_model_males)
-
-correlation_males <- cor.test(grad_enroll$Year, grad_enroll$Total_Males)
-correlation_males
-
-#Summary of model stats for female model: the model signficantly predicts female graduate enrollment. p < 0.001. R squared is 0.982. Correlation is 0.9913, indicating a strong positive correlation
-
-#Summary of model stats for male model: the model signficantly predicts male graduate enrollment. p < 0.001. R squared is 0.8545. Correlation is 0.9568, indicating a strong positive correlation
-
 ```
+__Figure 1. Total Female Enrollment in Graduate Programs (1967-2015).__ Annual enrollment by women in graduate programs between 1967 and 2015. Year significantly predicts graduate enrollment (b = 30126, t(47) = 51.66, p < 0.001) with a strong positive correlation (Pearson’s r = 0.99). The overall model signficantly explains women's enrollment each year (F(1,47) = 2669, p < 0.001, R2 = 0.98). Gray border indicates the 95% confidence interval for the mean predicted value. 
+
+__Figure 2. Total Male Enrollment in Graduate Programs (1967-2015).__ Annual enrollment by men in graduate programs between 1967 and 2015. Year significantly predicts graduate enrollment (b = 9069, t(47) = 16.61, p < 0.001) with a strong positive correlation (Pearson’s r = 0.99). The overall model signficantly explains women's enrollment each year (F(1,47) = 276, p < 0.001, R2 = 0.85). Gray border indicates the 95% confidence interval for the mean predicted value.
+
 
 1) continued: Extra graphs and info
 
@@ -259,6 +264,8 @@ employment_finalized
 
 
 ```
+__Figure 2. Salaries for Female and Male doctorate recipients (2015).__ Annual salaries for men and women in traditional employment positions and in postdoctorate positions. bars indictae median values, box indiciates interquartile range. Data points indiciate individual 
+
 
 4) Exploring academic salaries for professors in U.S. colleges. Explore relationships between
 variables in the ‘Faculty salary data (2008 - 2009 survey)’ dataset. Develop a model describing faculty
