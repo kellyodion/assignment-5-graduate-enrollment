@@ -34,13 +34,12 @@ States from 1967 - 2015. Describe your results statistically, graphically and in
 #Data managment for part 1
 
 
-<<<<<<< HEAD
+
 ```
 
 ```{r}
 #Graphs for part 1
 #total enrollment 
-=======
 #model of all female students over time
 
 grad_model_females <- lm(Total_Females ~ Year, data = grad_enroll)
@@ -65,12 +64,20 @@ grad_female_final_graph <- ggplot(grad_enroll, aes(x = Year, y = Total_Females))
   theme_bw() +
   scale_x_continuous( expand = c(0,0), limits = c(1967, 2015)) +
    scale_y_continuous(expand = c(0,0), limits = c(0,1800000)) +
-  labs(x = "Year", y = "US Annual Graduate School Enrollment- Women")
+  labs(x = "Year", y = "US Annual Graduate School Enrollment- Women") +
+  theme(text = element_text(family = "Times New Roman"))
 
 grad_female_final_graph
 
+#explore model fit 
+
+summary(grad_model_females)
+
+correlation_females <- cor.test(grad_enroll$Year, grad_enroll$Total_Females)
+correlation_females
+
 # graph of model for males
->>>>>>> c1fe095a025cd67bc51dfc405a336a8bff35f819
+
 
 grad_male_final_graph <- ggplot(grad_enroll, aes(x = Year, y = Total_Males)) +
   geom_point() +
@@ -78,11 +85,20 @@ grad_male_final_graph <- ggplot(grad_enroll, aes(x = Year, y = Total_Males)) +
   theme_bw() +
   scale_x_continuous( expand = c(0,0), limits = c(1967, 2015)) +
    scale_y_continuous(expand = c(0,0), limits = c(0,1800000)) +
-  labs(x = "Year", y = "US Annual Graduate School Enrollment- Men")
+  labs(x = "Year", y = "US Annual Graduate School Enrollment- Men") +
+   theme(text = element_text(family = "Times New Roman"))
 
 grad_male_final_graph
 
+#explore model fit
+summary(grad_model_males)
 
+correlation_males <- cor.test(grad_enroll$Year, grad_enroll$Total_Males)
+correlation_males
+
+#Summary of model stats for female model: the model signficantly predicts female graduate enrollment. p < 0.001. R squared is 0.982. Correlation is 0.9913, indicating a strong positive correlation
+
+#Summary of model stats for male model: the model signficantly predicts male graduate enrollment. p < 0.001. R squared is 0.8545. Correlation is 0.9568, indicating a strong positive correlation
 
 ```
 
@@ -230,11 +246,12 @@ employment_finalized <- ggplot(boxplot_data, aes(x = variable, y = value)) +
   geom_boxplot() +
   labs(y = "Annual Salary ($)", x = "") +
   geom_jitter(width = 0.1, aes(color = variable)) +
-  scale_color_manual(values = c("blue","lightblue", "green", "lightgreen"), 
+  scale_color_manual(values = c("darkblue","lightblue", "darkred", "red"), 
                      labels=c("Employed Males","Employed Females","Male Postdocs","Female Postdocs"), 
                      name = "Group") +
   scale_x_discrete(labels=c("Employed Males","Employed Females","Male Postdocs","Female Postdocs")) +
-  theme_classic()
+  theme_classic() +
+   theme(text = element_text(family = "Times New Roman"))
 
 employment_finalized
 
