@@ -14,6 +14,7 @@ library(tidyverse)
 library(stargazer)
 library(MASS)
 library(reshape2)
+library(car)
 
 faculty <- read_csv("faculty.csv")
 grad_enroll <-read_csv("grad_enrollment.csv")
@@ -194,6 +195,7 @@ rownames(phd_prop) <- c(
 "Education",
 "Humanities and arts")
 
+<<<<<<< HEAD
 
 Department<-c(
 "Physical sciences and earth sciences",
@@ -206,6 +208,8 @@ phd_names <- phd_prop %>%
 library(corrplot)
 corrplot(chisq$residuals, is.cor = FALSE)
 
+=======
+>>>>>>> f0bd90c7678c4d3eef47aacd624b8c4d7dcae60d
 
 ```
 
@@ -309,7 +313,8 @@ summary(professor_stepwise)
 
 ```{r}
 # Updated model
-# Excluded years since PhD because its largely expalined by years of faculty service
+
+# Excluded years of faculty service because its largely expalined by years of PhD
 
 professor_lm2 <- lm(salary ~ faculty_rank + discipline + years_since_phd + sex, data = faculty)
 
@@ -326,17 +331,49 @@ plot(professor_lm2)
 #F-statistic: 63.27 on 5 and 391 DF,  p-value: < 2.2e-16
 
 ```
+```{r}
+# Excluded years of PhD because its largely explained by years of faculty service
+
+professor_lm3 <- lm(salary ~ faculty_rank + discipline + years_faculty_service + sex, data = faculty)
+
+summary(professor_lm3)
+
+```
+
+
+```{r}
+professor_lm4 <- lm(salary ~ faculty_rank + discipline + sex, data = faculty)
+
+summary(professor_lm4)
+```
+
 
 ```{r}
 # AIC values
-sat_aic <- AIC(professor_lm1)
-final_aic <- AIC(professor_lm2)
+lm1_aic <- AIC(professor_lm1)
+lm2_aic <- AIC(professor_lm2)
+lm3_aic <- AIC(professor_lm3)
+lm4_aic <- AIC(professor_lm4)
+
+vif(professor_lm1)
+vif(professor_lm2)
+vif(professor_lm3)
+vif(professor_lm4)
 
 ```
 
 ```{r}
+# Interaction terms
+
+
+# AIC interaction terms
+```
+
+
+```{r}
 # Regression table
-lm_table <- stargazer(professor_lm1, professor_lm2, type = "html")
+lm_table <- stargazer(professor_lm3, type = "html")
 lm_table
+
 ```
 
