@@ -189,36 +189,53 @@ your report.
 chisq <- chisq.test(phd_prop)
 chisq
 
+
+
 rownames(phd_prop) <- c(
 "Physical sciences and earth sciences",
 "Engineering",
 "Education",
 "Humanities and arts")
 
-<<<<<<< HEAD
+
 
 Department<-c(
 "Physical sciences and earth sciences",
 "Engineering",
 "Education",
 "Humanities and arts")
-phd_names <- phd_prop %>% 
-  cbind(phd_prop, Department)
+
 
 library(corrplot)
 corrplot(chisq$residuals, is.cor = FALSE)
 
-=======
->>>>>>> f0bd90c7678c4d3eef47aacd624b8c4d7dcae60d
+
 
 ```
 
 Stacked bargraph for chisq
 ```{r}
 
-prop_melt<-melt(phd_names)
-prop_female <- ggplot(prop_melt, aes(x = variable, y = value)) +
-  geom_col(aes(fill = Department))
+
+
+prop <- round(prop.table(data.matrix(phd_prop),2),3)
+
+phd_names <- 
+  cbind(prop, Department) %>% 
+  data.frame()
+
+prop_melt<-melt(phd_names, id.vars = Department)
+
+fill <- c("#5F9EA0", "#E1B378", "darkblue", "red")
+
+
+prop_female <- ggplot(prop_melt, aes(x = Var2, y = value)) +
+  geom_bar(aes(fill = Department), stat="identity") +
+  theme_classic() +
+   theme(text = element_text(family = "Times New Roman")) +
+  scale_fill_manual(values = fill) +
+  scale_y_continuous() +
+  labs( x = "Year", y = "Count")
 
 prop_female 
 ```
