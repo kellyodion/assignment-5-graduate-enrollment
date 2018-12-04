@@ -182,7 +182,7 @@ and in text. Note: There are several ways that you can interpret this question. 
 which you think is/are most interesting. Just be really clear about what you are asking/answering in
 your report.
 ```{r}
-#chi square? 
+
 #proportions of females in those four fields from 1985 to 2000 and from 2000 to 2015 
 
 chisq <- chisq.test(phd_prop)
@@ -194,10 +194,15 @@ rownames(phd_prop) <- c(
 "Education",
 "Humanities and arts")
 
+
 library(corrplot)
 corrplot(chisq$residuals, is.cor = FALSE)
 
 
+```
+
+Stacked bargraph for chisq
+```{r}
 
 ```
 
