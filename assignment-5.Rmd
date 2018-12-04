@@ -195,6 +195,14 @@ rownames(phd_prop) <- c(
 "Humanities and arts")
 
 
+Department<-c(
+"Physical sciences and earth sciences",
+"Engineering",
+"Education",
+"Humanities and arts")
+phd_names <- phd_prop %>% 
+  cbind(phd_prop, Department)
+
 library(corrplot)
 corrplot(chisq$residuals, is.cor = FALSE)
 
@@ -204,6 +212,11 @@ corrplot(chisq$residuals, is.cor = FALSE)
 Stacked bargraph for chisq
 ```{r}
 
+prop_melt<-melt(phd_names)
+prop_female <- ggplot(prop_melt, aes(x = variable, y = value)) +
+  geom_col(aes(fill = Department))
+
+prop_female 
 ```
 
 3) Male and female salaries for starting postdoctoral and other employment positions (2015).
