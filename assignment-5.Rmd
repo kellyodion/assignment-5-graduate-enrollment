@@ -262,7 +262,7 @@ employment_finalized
 
 
 ```
-__Figure 2. Salaries for Female and Male doctorate recipients (2015).__ Annual salaries for men and women in traditional employment positions and in postdoctorate positions. bars indictae median values, box indiciates interquartile range. Data points indiciate individual 
+__Figure 2. Salaries for Female and Male doctorate recipients (2015).__ Annual salaries for men and women in traditional employment positions and in postdoctorate positions. bars indictae median values, boxes indiciates interquartile range. Data points indiciate individual observations. 
 
 
 4) Exploring academic salaries for professors in U.S. colleges. Explore relationships between
@@ -301,6 +301,11 @@ summary(professor_lm2)
 plot(professor_lm2)
 
 # Heteroscedasticity and residuals normality look OK
+
+#Residual standard error: 22660 on 391 degrees of freedom
+#Multiple R-squared:  0.4472,	Adjusted R-squared:  0.4401 
+#F-statistic: 63.27 on 5 and 391 DF,  p-value: < 2.2e-16
+
 ```
 ```{r}
 # Excluded years of PhD because its largely explained by years of faculty service
