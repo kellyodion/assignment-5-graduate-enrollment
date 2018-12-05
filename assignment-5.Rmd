@@ -200,10 +200,10 @@ chisq
 
 
 Department<-c(
-"Physical sciences and earth sciences",
+"Physical Sciences and Earth Sciences",
 "Engineering",
 "Education",
-"Humanities and arts")
+"Humanities and Arts")
 
 
 library(corrplot)
@@ -222,8 +222,7 @@ prop <- round(prop.table(data.matrix(phd_prop),2),3)
 
 phd_names <- 
   cbind(prop, Department) %>% 
-  data.frame() %>% 
-  gather(year, prop, Year_1985:Year_2015)
+  data.frame() 
 
 phd_names <- data.frame(lapply(phd_names, as.character), stringsAsFactors = FALSE)
 prop_melt<-melt(phd_names, id = "Department")
@@ -238,7 +237,8 @@ prop_female <- ggplot(prop_melt, aes(x = variable, y = as.numeric(value))) +
    theme(text = element_text(family = "Times New Roman")) +
   scale_fill_manual(values = fill) +
   scale_y_continuous() +
-  labs( x = "Year", y = "Proportion")
+  labs( x = "Year", y = "Proportion") +
+  scale_x_discrete(labels = c("1985", "2000", "2015"))
 
 prop_female 
 ```
