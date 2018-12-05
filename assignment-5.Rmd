@@ -191,11 +191,11 @@ chisq
 
 
 
-rownames(phd_prop) <- c(
-"Physical sciences and earth sciences",
-"Engineering",
-"Education",
-"Humanities and arts")
+#rownames(phd_prop) <- c(
+#"Physical sciences and earth sciences",
+#"Engineering",
+#"Education",
+#"Humanities and arts")
 
 
 
@@ -222,20 +222,23 @@ prop <- round(prop.table(data.matrix(phd_prop),2),3)
 
 phd_names <- 
   cbind(prop, Department) %>% 
-  data.frame()
+  data.frame() %>% 
+  gather(year, prop, Year_1985:Year_2015)
 
-prop_melt<-melt(phd_names, id.vars = Department)
+phd_names <- data.frame(lapply(phd_names, as.character), stringsAsFactors = FALSE)
+prop_melt<-melt(phd_names, id = "Department")
 
-fill <- c("#5F9EA0", "#E1B378", "darkblue", "red")
+
+fill <- c("#5F9EA0", "#E1B378", "darkblue", "red") 
 
 
-prop_female <- ggplot(prop_melt, aes(x = Var2, y = value)) +
+prop_female <- ggplot(prop_melt, aes(x = variable, y = as.numeric(value))) +
   geom_bar(aes(fill = Department), stat="identity") +
   theme_classic() +
    theme(text = element_text(family = "Times New Roman")) +
   scale_fill_manual(values = fill) +
   scale_y_continuous() +
-  labs( x = "Year", y = "Count")
+  labs( x = "Year", y = "Proportion")
 
 prop_female 
 ```
